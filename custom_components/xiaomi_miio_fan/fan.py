@@ -69,6 +69,7 @@ MODEL_FAN_ZA3 = "zhimi.fan.za3"  # Pedestal Fan Fan ZA3
 MODEL_FAN_ZA4 = "zhimi.fan.za4"  # Pedestal Fan Fan ZA4
 MODEL_FAN_ZA5 = "zhimi.fan.za5"  # Smartmi Standing Fan 3
 MODEL_FAN_P5 = "dmaker.fan.p5"  # Pedestal Fan Fan P5
+MODEL_FAN_P5C = "dmaker.fan.p5c"  # Pedestal Fan Fan P5
 MODEL_FAN_P8 = "dmaker.fan.p8"  # Pedestal Fan Fan P8
 MODEL_FAN_P9 = "dmaker.fan.p9"  # Pedestal Fan Fan P9
 MODEL_FAN_P10 = "dmaker.fan.p10"  # Pedestal Fan Fan P10
@@ -95,6 +96,7 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
                 MODEL_FAN_ZA4,
                 MODEL_FAN_ZA5,
                 MODEL_FAN_P5,
+                MODEL_FAN_P5C,
                 MODEL_FAN_P8,
                 MODEL_FAN_P9,
                 MODEL_FAN_P10,
@@ -469,6 +471,11 @@ async def async_setup_platform(hass, config, async_add_entities, discovery_info=
         fan = Fan(host, token, model=model)
         device = XiaomiFan(name, fan, model, unique_id, retries, preset_modes_override)
     elif model == MODEL_FAN_P5:
+        fan = FanP5(host, token, model=model)
+        device = XiaomiFanP5(
+            name, fan, model, unique_id, retries, preset_modes_override
+        )
+    elif model == MODEL_FAN_P5C:
         fan = FanP5(host, token, model=model)
         device = XiaomiFanP5(
             name, fan, model, unique_id, retries, preset_modes_override
